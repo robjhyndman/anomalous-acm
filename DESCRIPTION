@@ -1,0 +1,15 @@
+Package: anomalous-acm
+Type: Package
+Title: Unusual Time Series Detection
+Version: 0.1.0
+Depends: R (>= 3.0.2), ForeCA, alphahull
+Suggests: testthat
+Imports: pcaPP, hdrcde, mgcv, RcppRoll (>= 0.2.2)
+LazyLoad: yes
+LazyData: yes
+ByteCompile: TRUE
+Author: Rob J Hyndman, Earo Wang, Nikolay Laptev 
+Maintainer: Rob J Hyndman <Rob.Hyndman@monash.edu>
+BugReports: https://github.com/robjhyndman/anomalous-acm/issues
+Description: Methods for detecting anomalous time series.
+License: ACM
