@@ -9,7 +9,7 @@ LazyLoad: yes
 LazyData: yes
 ByteCompile: TRUE
 Author: Rob J Hyndman, Earo Wang, Nikolay Laptev 
-Maintainer: Rob J Hyndman <Rob.Hyndman@monash.edu>
+Maintainer: Earo Wang <earo.wang@gmail.com>
 BugReports: https://github.com/robjhyndman/anomalous-acm/issues
 Description: Methods for detecting anomalous time series.
 License: ACM
