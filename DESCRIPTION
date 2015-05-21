@@ -1,4 +1,4 @@
-Package: anomalous-acm
+Package: anomalousACM
 Type: Package
 Title: Unusual Time Series Detection
 Version: 0.1.0
