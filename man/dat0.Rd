@@ -2,7 +2,7 @@
 \alias{dat0}
 \title{Aggregated and anonymized datasets from Yahoo representing server metrics of Yahoo services}
 \description{
-  Aggregated and anonymized datasets from Yahoo representing server metrics of Yahoo services.
+  Aggregated and anonymized dataset from Yahoo representing server metrics of Yahoo services.
   \code{dat0} contains 44 time series each with 1437 observations.
 }
 
