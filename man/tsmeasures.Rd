@@ -5,11 +5,12 @@
   Computes various different features (e.g., entropy, trend, seasonality) of a set of time-series
 }
 \usage{
-  tsmeasures(y, normalise = TRUE, width, window)
+tsmeasures(y, normalise = TRUE, 
+  width=ifelse(frequency(y)>1, frequency(y), 10), window=width) 
 }
 \arguments{
   \item{y}{A multivariate time series}
-  \item{normalise}{If TRUE, each time series is scaled to be normally distributed with mean 0 and sd 1}
+  \item{normalise}{If \code{TRUE}, each time series is scaled to be normally distributed with mean 0 and sd 1}
   \item{width}{A window size for variance change, level shift and lumpiness}
   \item{window}{A window size for KLscore}
 }
@@ -39,12 +40,14 @@
   Rob J Hyndman, Earo Wang, Nikolay Laptev
 }
 
+\seealso{
+  \code{\link[ForeCA]{continuous_entropy}}
+}
 \examples{
-  z <- ts(matrix(rnorm(3000),ncol = 30),freq = 4)
-  y <- tsmeasures(z, window = 30)
+  y <- tsmeasures(dat0, window = 48)
   # Add mean and variance to the "features" matrix
-  avg <- colMeans(z)
-  variance <- apply(z, 2, var)
+  avg <- colMeans(dat0)
+  variance <- apply(dat0, 2, var)
   y <- cbind(y, avg, variance)
   class(y) <- c("features", "matrix")
 }

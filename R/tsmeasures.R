@@ -1,4 +1,5 @@
-tsmeasures <- function(y, normalise = TRUE, width, window) {
+tsmeasures <- function(y, normalise = TRUE, 
+  width=ifelse(frequency(y)>1, frequency(y), 10), window=width) {
   # y: a multivariate time series
   # normalise: TRUE: scale data to be normally distributed
   # width: a window size for variance change and level shift, lumpiness
@@ -6,15 +7,9 @@ tsmeasures <- function(y, normalise = TRUE, width, window) {
   y <- as.ts(y)
   tspy <- tsp(y)
   freq <- frequency(y)
-  if (missing(width)) {
-    width <- freq
-  }
-  if (width <= 1L) {
-    stop("width should be more than 1.")
-  }
-  if (missing(window)) {
-    window <- freq
-  }
+  if (width <= 1L | window <= 1L)
+    stop("window widths should be greater than 1.")
+
   # Remove columns containing all NAs
   nay <- is.na(y)
   allna <- apply(nay, 2, all)

@@ -1,12 +1,14 @@
 \name{dat0}
 \alias{dat0}
-\title{Aggregated and anonymized dataset from Yahoo representing server metrics of Yahoo services}
+\title{Aggregated and anonymized datasets from Yahoo representing server metrics of Yahoo services}
 \description{
-  Aggregated and anonymized dataset from Yahoo representing server metrics of Yahoo services.
+  Aggregated and anonymized datasets from Yahoo representing server metrics of Yahoo services.
+  \code{dat0} contains 44 time series each with 1437 observations.
 }
 
-\usage{
-  data(dat0)
+\examples{
+  plot(dat0[,1:10])
+  plot(dat0, plot.type='single', col=1:44)
 }
 
 \format{time series}
