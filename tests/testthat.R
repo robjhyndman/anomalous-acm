@@ -1,2 +1,2 @@
 library(testthat)
-test_check("anomalous")
+test_check("anomalousACM")
