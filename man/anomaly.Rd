@@ -14,9 +14,9 @@
 \arguments{
   \item{x}{A feature matrix returned by `tsmeasures` function}
   \item{n}{Number of unusual time-series to return}
-  \item{method}{Bivariate outlier detection method used for detecting high density regions of the first two principle components extracted from the time-series}
+  \item{method}{Bivariate outlier detection method used for detecting high density regions of the first two principal components extracted from the time-series}
   \item{robust}{If TRUE a robust PCA will be used for feature extraction}
-  \item{plot}{If TRUE, a visualization of the anomalous time-series in the first two principle compoents will be shown}
+  \item{plot}{If TRUE, a visualization of the anomalous time-series in the first two principal compoents will be shown}
   \item{labels}{If TRUE, labels will be added to give the anomlous time series an ordering index.}
   \item{col}{A vector of length 2 giving the colours for the first and second set of points respectively (and the corresponding axes). 
              If a single colour is specified it will be used for both sets. If missing the default colour is used.}
