@@ -9,6 +9,8 @@ spectral entropy, etc. Then a robust principal component decomposition is used o
 This enables the most unusual series, based on their feature vectors, to be identified. The bivariate outlier detection methods used are based on highest density regions and alpha-hulls.
 For demo purposes, this package contains both synthetic and real data from Yahoo.
 
+A cut-down version of this package under a GPL licence is available from http://github.com/robjhyndman/anomalous.
+
 Simple Example
 ==============
 
