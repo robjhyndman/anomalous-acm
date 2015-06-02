@@ -7,9 +7,9 @@ hdr <- anomaly(features0, n = 3, plot = TRUE, method = "hdr")
 # Anomaly detection by bivariate alpha-hull
 ahull <- anomaly(features0, n = 3, plot = TRUE, method = "ahull")
 # Plot top 3 anomalous time series by bivariate kernel density
-plot(dat0[, hdr])
+plot(dat0[, hdr$index])
 # Plot top 3 anomalous time series by ahull 
-plot(dat0[, ahull])
+plot(dat0[, ahull$index])
 
 # Compute feature matrix for the synthetic "dat4" data set
 features0 <- tsmeasures(dat4, width = 24, window = 48)
@@ -20,9 +20,9 @@ hdr <- anomaly(features0, n = 3, plot = TRUE, method = "hdr")
 # Anomaly detection by bivariate alpha-hull
 ahull <- anomaly(features0, n = 3, plot = TRUE, method = "ahull")
 # Plot top 3 anomalous time series by bivariate kernel density
-plot(dat4[, hdr])
+plot(dat4[, hdr$index])
 # Plot top 3 anomalous time series by ahull 
-plot(dat4[, ahull])
+plot(dat4[, ahull$index])
 
 # Compute feature matrix for the synthetic "dat5" data set
 features0 <- tsmeasures(dat5, width = 24, window = 48)
@@ -33,6 +33,6 @@ hdr <- anomaly(features0, n = 3, plot = TRUE, method = "hdr")
 # Anomaly detection by bivariate alpha-hull
 ahull <- anomaly(features0, n = 3, plot = TRUE, method = "ahull")
 # Plot top 3 anomalous time series by bivariate kernel density
-plot(dat5[, hdr])
+plot(dat5[, hdr$index])
 # Plot top 3 anomalous time series by ahull 
-plot(dat5[, ahull])
+plot(dat5[, ahull$index])
