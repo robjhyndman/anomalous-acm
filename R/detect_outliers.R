@@ -21,7 +21,7 @@ anomaly <- function(x, n = 10, method = c("hdr", "ahull"), robust = TRUE,
     rbt.pca <- princomp(scale(naomit.x, center = TRUE, scale = TRUE), 
                         cor = TRUE)
   }
-  scores <- rbt.pca$scores
+  scores <- rbt.pca$scores[,1:2] #make non-robust PCA work, prevent dimension mismatch below
   scoreswNA <- matrix(, nrow = nc, ncol = 2)
   scoreswNA[avl, ] <- scores
   tmp.idx <- vector(length = n)
