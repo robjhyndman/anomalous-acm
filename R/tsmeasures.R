@@ -111,7 +111,7 @@ RVarChange <- function(x, width) {
 
 # the number of crossing points
 Cpoints <- function(x) {
-  midline <- diff(range(x, na.rm = TRUE))/2
+  midline <- sum(range(x, na.rm = TRUE))/2
   ab <- x <= midline
   lenx <- length(x)
   p1 <- ab[1:(lenx - 1)]
