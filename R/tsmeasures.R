@@ -15,7 +15,11 @@ tsmeasures <- function(y, normalise = TRUE,
   allna <- apply(nay, 2, all)
   x <- y[, !allna]
   if (normalise) {
-    x <- as.ts(scale(x, center = TRUE, scale = TRUE)) # Normalise data to mean = 0, sd = 1
+    # Normalise data to mean = 0, sd = 1, unless constant, then normalize to all 0
+    x <- as.ts(apply(x, 2, function(x) {
+      scale(x, center = TRUE, scale = !is.constant(x))
+    }))
+
   }
   trimx <- as.ts(apply(x, 2, Trim))
   tsp(trimx) <- tsp(x) <- tspy
@@ -52,6 +56,14 @@ tsmeasures <- function(y, normalise = TRUE,
   mat[!allna, ] <- tmp
   out <- structure(mat, class = c("features", "matrix"))
   return(out)
+}
+
+#this function is copied from the forecast package
+is.constant <- function (x) 
+{
+    x <- as.numeric(x)
+    y <- rep(x[1], length(x))
+    return(identical(x, y))
 }
 
 # Trimmed time series elimating outliers's influence
