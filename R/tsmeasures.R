@@ -181,7 +181,7 @@ VarTS <- function(x, tspx) {
       trend0 <- fitted(mgcv::gam(contx ~ s(tt)))
       remainder <- contx - trend0
       deseason <- contx - trend0
-      v.adj <- var(trend0, na.rm = TRUE)
+      v.adj <- var(remainder, na.rm = TRUE)
     }
     trend <- ifelse(var(deseason, na.rm = TRUE) < 1e-10, 0,
                     max(0, min(1, 1 - v.adj/var(deseason, na.rm = TRUE))))
