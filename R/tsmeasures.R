@@ -43,11 +43,15 @@ tsmeasures <- function(y, normalise = TRUE,
     measures$peak <- sapply(varts, function(x) x$peak)
     measures$trough <- sapply(varts, function(x) x$trough)
   }
-  threshold <- dnorm(38)
-  kl <- apply(x, 2, function(x) 
-              KLscore(x, window = window, threshold = threshold))
-  measures$KLscore <- sapply(kl, function(x) x$score)
-  measures$change.idx <- sapply(kl, function(x) x$change.idx)
+  if (nrow(y) <= (2 * window)) {
+    warning("I cannot compute KLscore when the length is too small.")
+  } else {
+    threshold <- dnorm(38)
+    kl <- apply(x, 2, function(x) 
+                KLscore(x, window = window, threshold = threshold))
+    measures$KLscore <- sapply(kl, function(x) x$score)
+    measures$change.idx <- sapply(kl, function(x) x$change.idx)
+  }
   tmp <- do.call(cbind, measures)
   nr <- ncol(y)
   nc <- length(measures)
@@ -213,9 +217,6 @@ KLscore <- function(x, window, threshold = dnorm(38)) {
   tmpx <- x[!is.na(x)] # Remove NA to calculate bw
   bw <- bw.nrd0(tmpx) 
   lenx <- length(x)
-  if (lenx <= (2 * window)) {
-    stop("I cannot compute KLscore when the length is too small.")
-  }
   # Using binning algorithm to achieve efficiency but obsecure exact positions.
   # lastrep <- ceiling(lenx/5) 
   # group <- rep(1:lastrep, each = 5)[1:lenx]
