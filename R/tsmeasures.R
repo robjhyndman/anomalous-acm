@@ -10,10 +10,16 @@ tsmeasures <- function(y, normalise = TRUE,
   if (width <= 1L | window <= 1L)
     stop("window widths should be greater than 1.")
 
+  #if single time series is supplied, convert to matrix
+  if(is.null(dim(y))) {
+	y <- as.ts(as.matrix(y))
+	tsp(y) <- tspy
+  } 
+
   # Remove columns containing all NAs
   nay <- is.na(y)
   allna <- apply(nay, 2, all)
-  x <- y[, !allna]
+  x <- y[, !allna, drop=FALSE]
   if (normalise) {
     # Normalise data to mean = 0, sd = 1, unless constant, then normalize to all 0
     x <- as.ts(apply(x, 2, function(x) {
@@ -101,7 +107,11 @@ Entropy <- function(x) {
 
 # First order of autocorrelation
 FoAcf <- function(x) {
-  return(acf(x, plot = FALSE, na.action = na.exclude)$acf[2L])
+  foacf <- try(acf(x, plot = FALSE, na.action = na.exclude)$acf[2L], silent = TRUE)
+  if (class(foacf) == "try-error") {
+    foacf <- NA
+  }
+  return(foacf)
 }
 
 # Level shift using rolling window
