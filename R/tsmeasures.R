@@ -50,7 +50,10 @@ tsmeasures <- function(y, normalise = TRUE,
     measures$trough <- sapply(varts, function(x) x$trough)
   }
   if (nrow(y) <= (2 * window)) {
-    warning("I cannot compute KLscore when the length is too small.")
+    #warning("I cannot compute KLscore when the length is too small.")
+		measures$KLscore <- NA
+		measures$change.idx <- NA
+		
   } else {
     threshold <- dnorm(38)
     kl <- apply(x, 2, function(x) 
@@ -116,21 +119,31 @@ FoAcf <- function(x) {
 
 # Level shift using rolling window
 RLshift <- function(x, width) {
-  rollmean <- RcppRoll::roll_mean(x, width, na.rm = TRUE)
-  lshifts <- tryCatch(max(abs(diff(rollmean, width)), na.rm = TRUE),
-                      warning = function(w) w)
-  if (any(class(lshifts) == "warning")) {
+  rollmean <- try(RcppRoll::roll_mean(x, width, na.rm = TRUE), silent = TRUE)
+  
+  if (class(rollmean) == "try-error") {
     lshifts <- NA
+  } else {
+    lshifts <- tryCatch(max(abs(diff(rollmean, width)), na.rm = TRUE),
+        warning = function(w) w)
+    if (any(class(lshifts) == "warning")) {
+      lshifts <- NA
+    }
   }
   return(lshifts)
 }
 
 RVarChange <- function(x, width) {
-  rollvar <- RcppRoll::roll_var(x, width, na.rm = TRUE)
-  vchange <- tryCatch(max(abs(diff(rollvar, width)), na.rm = TRUE),
-                      warning = function(w) w)
-  if (any(class(vchange) == "warning")) {
+  rollvar <- try(RcppRoll::roll_var(x, width, na.rm = TRUE), silent = TRUE)
+  
+  if (class(rollvar) == "try-error") {
     vchange <- NA
+  } else {
+    vchange <- tryCatch(max(abs(diff(rollvar, width)), na.rm = TRUE),
+        warning = function(w) w)
+    if (any(class(vchange) == "warning")) {
+      vchange <- NA
+    }
   }
   return(vchange)
 }
@@ -169,7 +182,7 @@ VarTS <- function(x, tspx) {
   freq <- tspx[3]
   contx <- try(na.contiguous(x), silent = TRUE)
   len.contx <- length(contx)
-  if (length(contx) < 2 * freq || class(contx) == "try-error") {
+  if (length(contx) <= 2 * freq || class(contx) == "try-error") {
     trend <- linearity <- curvature <- season <- spike <- peak <- trough <- NA
   } else {
     if (freq > 1L) {
