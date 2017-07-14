@@ -23,7 +23,7 @@ anomaly <- function(x, n = 10, method = c("hdr", "ahull"), robust = TRUE,
   }
   scores <- rbt.pca$scores[,1:2] #make non-robust PCA work, prevent dimension mismatch below
   scoreswNA <- matrix(, nrow = nc, ncol = 2)
-  scoreswNA[avl, ] <- scores
+  scoreswNA[avl, ] <- scores[, 1:2]
   tmp.idx <- vector(length = n)
   if (method == "hdr") {
     ordered <- TRUE
